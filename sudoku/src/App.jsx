@@ -1,7 +1,8 @@
 import './App.css'
 import Controls from './components/Controls';
 import Grid from './components/Grid';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { fetchPuzzle } from './fetch-puzzle';
 
 function App() {
    const [board,setBoard] = useState( Array(9)
@@ -22,8 +23,19 @@ function App() {
 
   
   const [status,setStatus] = useState('');
-  
   const[error,setError] = useState('');
+
+  useEffect(() => {
+    fetchPuzzle({
+      setError,
+      setStatus,
+      setPuzzle,
+      setSolution,
+      setBoard,
+      setSelected,
+    });
+
+  },[])
   
   
   const [selected,setSelected] = useState(null);
@@ -53,10 +65,18 @@ function App() {
       setBoard(puzzle.map((row)=>[...row]));
       setStatus('');
       setSelected(null);
-      setGreenCount(0)
+      setGreenCount(0);
   };
   const handleNewPuzzle = () => {
-    setGreenCount(0)
+    setGreenCount(0);
+    fetchPuzzle({
+      setError,
+      setStatus,
+      setPuzzle,
+      setSolution,
+      setBoard,
+      setSelected,
+    });
   };
 
  const handleInput = (rIdx, cIdx, value) => {
