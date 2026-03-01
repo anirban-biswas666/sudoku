@@ -1,6 +1,5 @@
-const SUDOKU_API= 
-'https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:1){grids{solution}}}';
-
+const SUDOKU_API =
+'https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:1){grids{value,solution}}}';
 
 export const fetchPuzzle= async ({
               setError,
